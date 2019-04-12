@@ -1,0 +1,18 @@
+endpoints {
+  
+  action-endpoints {
+  //   action-endpoint (__ACTION_NAME__) {
+  //     accepted-inputs (__LIST_OF_ACTION_INPUTS__)
+  //     local-endpoint (__JS_FILE_NAME_FUNCTION_REFERENCE__)
+  //   }
+  // }
+
+    action-endpoint (PausePlayer) {
+      accepted-inputs ()
+      remote-endpoint (https://api.spotify.com/v1/me/player/pause) {
+        method (PUT)
+      }
+      // authorization (User)
+    }
+  }
+}

@@ -1,0 +1,11 @@
+action (PausePlayer) {
+  type (Search)
+  description (Pause user playback)
+  // collect {
+  //   input () {
+  //     type (UpdateActivity)
+  //     // min (Optional) max (One)
+  //   }
+  // }
+  output (status_pause)
+}

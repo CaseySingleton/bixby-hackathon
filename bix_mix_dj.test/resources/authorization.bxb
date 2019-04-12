@@ -1,0 +1,10 @@
+authorization{
+  user{
+    oauth2-authorization-code(Spotify)
+    authorize-endpoint (https://accounts.spotify.com/authorize)
+    client-id (MY_CLIENT_ID)
+    client-secret-key (MY_CLIENT_SECRET_KEY)
+    scope (playlist-read-private playlist-read-collaborative ...)
+    token-endpoint (https://accounts.spotify.com/api/token)
+  }
+}
