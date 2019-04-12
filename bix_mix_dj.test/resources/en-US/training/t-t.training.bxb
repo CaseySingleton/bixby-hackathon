@@ -1,5 +1,5 @@
 train (t-tsh22j8bybv5ml8gt6v5cm6gx) {
-  utterance ("[g:PausePlayer] please (stop)[v:status_pause] the music")
-  plan (Y2BmkEnKrIjPBeKULL2S1OISveKSxJLS4viCxNLiVAKy0uiyASDhgJzEytQiBkYGJiBmBNNMDEAAAA==)
-  last-modified (1555061521312)
+  utterance ("[g:PausePlayer] please (stop)[v:auth] the music")
+  plan (Y2BmEEnKrIjPBeKULL2S1OISvcTSkgwcotLoogGJpcWpATmJlalFDIwMTEDMCKaZGIAAAA==)
+  last-modified (1555111323368)
 }

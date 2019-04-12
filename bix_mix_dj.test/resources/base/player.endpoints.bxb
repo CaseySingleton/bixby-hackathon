@@ -7,14 +7,14 @@ endpoints {
     authorize-endpoint (https://accounts.spotify.com/authorize)
     client-id (secret.get(id))
     client-secret (MY_CLIENT_SECRET_KEY)
-    scope (playlist-read-private playlist-read-collaborative ...)
+    scope ()
     token-endpoint (https://accounts.spotify.com/api/token)
   }
 }
   action-endpoints {
     action-endpoint (PausePlayer) {
-      accepted-inputs (__LIST_OF_ACTION_INPUTS__)
-      local-endpoint (__JS_FILE_NAME_FUNCTION_REFERENCE__)
+      accepted-inputs ($vivContext)
+      local-endpoint (Pause.js)
     } 
     // authorization (User)
   
