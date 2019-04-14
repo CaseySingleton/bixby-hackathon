@@ -1,0 +1,26 @@
+action (RandomQuery) {
+  type (Search)
+  description (Gets a random set of tracks from the spotify API)
+  collect {
+    input (numberOfSongs) {
+      type (NumberOfSongs)
+      min (Optional) max (Many)
+      default-init {
+        intent {
+          goal {NumberOfSongs}
+          value {NumberOfSongs(10)}
+        }
+      }
+      validate {
+        if (numberOfSongs > 50) {
+          prompt {
+            dialog {
+              template ("Hello")
+            }
+          }
+        }
+      }
+    }
+  }
+  output (Tracks)
+}

@@ -1,0 +1,17 @@
+result-view {
+  match { Tracks (tracks) }
+  render {
+    layout {
+      section {
+        content {
+          single-line {
+            text {
+              style (Detail_M)
+              value ("TrackID: #{value(tracks.trackIDs)}")
+            }
+          }
+        }
+      }
+    }
+  }
+}

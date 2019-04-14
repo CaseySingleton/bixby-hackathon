@@ -1,0 +1,7 @@
+structure (Tracks) {
+  description (A list of tracks)
+  property (trackIDs) {
+    type (TrackID)
+    min (Required) max (Many)
+  }
+}
