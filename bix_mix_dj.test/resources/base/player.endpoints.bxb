@@ -1,38 +1,19 @@
 endpoints {
-  
-authorization{
-  oauth{
-    provider(Spotify)
-    grant-type (authorization_code)
-    authorize-endpoint (https://accounts.spotify.com/authorize)
-    client-id (73b6be8b3bdd40919f6fefc272a22f1b)
-    client-secret (9c54b3c2333749f9bcd1f3231967b99c)
-    scope (user-read-playback-state)
-    token-endpoint (https://accounts.spotify.com/api/token)
+  authorization{
+    oauth{
+      provider(Spotify)
+      grant-type (authorization_code)
+      authorize-endpoint (https://accounts.spotify.com/authorize)
+      client-id (73b6be8b3bdd40919f6fefc272a22f1b)
+      client-secret (9c54b3c2333749f9bcd1f3231967b99c)
+      scope (user-read-playback-state)
+      token-endpoint (https://accounts.spotify.com/api/token)
+    }
   }
-}
-  action-endpoints {
-    action-endpoint (PausePlayer) {
-      accepted-inputs ($vivContext)
-      local-endpoint (Pause.js)
-    } 
-    // authorization (User)
-  
-
-    // action-endpoint (PausePlayer) {
-    //   accepted-inputs ()
-    //   remote-endpoint (https://api.spotify.com/v1/me/player/pause) {
-    //     method (PUT)
-    //   }
-    //    authorization(User)
-    // }
-//     
-//     action-endpoint (authorize) {
-//       accepted-inputs ()
-//       remote-endpoint (https://localhost:8888) {
-//         method (GET)
-//       }
-//        authorization(User)
-//     }
+    action-endpoints {
+      action-endpoint (RandomQuery) {
+        accepted-inputs (numberOfSongs)
+        local-endpoint (RandomQuery.js)
+    }
   }
 }
