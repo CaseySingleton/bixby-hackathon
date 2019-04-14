@@ -4,11 +4,17 @@ result-view {
     layout {
       section {
         content {
-          single-line {
-            text {
-              style (Detail_M)
-              value ("TrackID: #{value(tracks.trackIDs)}")
-            }
+          paragraph {
+            style (Title_M)
+            value("Track IDs: #{value(tracks.trackIDs)}")
+          }
+          paragraph {
+            style (Title_M)
+            value("Names: #{value(tracks.trackNames)}")
+          }
+          paragraph {
+            style (Title_M)
+            value("Tempos: #{value(tracks.tempos)}")
           }
         }
       }

@@ -4,7 +4,7 @@ action (RandomQuery) {
   collect {
     input (numberOfSongs) {
       type (NumberOfSongs)
-      min (Optional) max (Many)
+      min (Optional) max (One)
       default-init {
         intent {
           goal {NumberOfSongs}
@@ -20,6 +20,10 @@ action (RandomQuery) {
           }
         }
       }
+    }
+    input (requestedTempo) {
+      type (RequestedTempo)
+      min (Optional) max (One)
     }
   }
   output (Tracks)

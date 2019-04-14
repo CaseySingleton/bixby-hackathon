@@ -3,7 +3,7 @@
  var http = require('http')
  var console = require('console')
 
-module.exports.function = function randomNameQuery (numberOfSongs) {
+module.exports.function = function randomNameQuery (numberOfSongs, requestedTempo) {
 
   // If this was C, str[index] = character. But this is not C
   function setCharAt(str, index, character) {
@@ -41,30 +41,35 @@ module.exports.function = function randomNameQuery (numberOfSongs) {
     for (var i = getRandomNumber(2); i < 2; i++) {
       var randomIndex = getRandomNumber(text.length)
       if (text.charAt(randomIndex - 1) !== '*' && text.charAt(randomIndex + 1) !== '*')
-      text = setCharAt(text, randomIndex, '*')
+        text = setCharAt(text, randomIndex, '*')
     }
     return (text)
   }
 
-  // Returns a list of track IDs as a single string delimited by commas
-  function getTrackIDs() {
+  function querySpotify() {
     var queryName = getRandomQuery()
     var queryOffset = getRandomNumber(950)
     var query = "https://api.spotify.com/v1/search?q=" + queryName + "&type=track&market=US&limit=50&offset=" + queryOffset
-  
     var data = http.oauthGetUrl(query, {format: "json"})
+    return (data)
+  }
+  
+  // Returns a list of track IDs as a single string delimited by commas
+  function getGeneralTrackInfo(data) {
     var trackIDs = []
-    for (var i = 0; i < numberOfSongs; i++) {
+    var trackNames = []
+    var images = []
+    for (var i = 0; i < 50; i++) {
       trackIDs[i] = data.tracks.items[i].id
+      trackNames[i] = data.tracks.items[i].name
+      images[i] = data.tracks.items[i].album.images[0].url
     }
-    return (trackIDs.join())
+    return {ids: trackIDs, names: trackNames, images: images}
   }
 
-  function getTrackDetails(trackIDs) {
+  function getDetailedTrackInfo(trackIDs) {
     var query = "https://api.spotify.com/v1/audio-features?ids=" + trackIDs
-    console.log(query)
     var trackDetails = http.oauthGetUrl(query, {format: "json"})
-    // console.log(trackDetails)
     return (trackDetails)
   }
   
@@ -73,11 +78,24 @@ module.exports.function = function randomNameQuery (numberOfSongs) {
     for (var i = 0; i < numberOfSongs; i++) {
       tempos[i] = trackDetails.audio_features[i].tempo
     }
+    return (tempos)
   }
-
-  var trackDetails = getTrackDetails(getTrackIDs())
-  var tempos = getTrackTempos(trackDetails)
-  console.log(tempos)
-  return {trackIDs: "Hello"}
+  
+  function getTracksOfSimilarTempo() {
+    var data = querySpotify()
+    var info = getDetailedTrackInfo(data)
+    console.log(info)
+    var trackDetails = getDetailedTrackInfo(trackIDs.join())
+    var tempos = getTrackTempos(trackDetails)
+  }
+  
+  getTracksOfSimilarTempo()
+  return {
+    trackIDs: "123",
+    tempos: 456,
+    trackNames: "trackNames",
+    trackAlbumImage: "images",
+    trackTiming: "0"
+  }
 }
 

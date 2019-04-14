@@ -12,7 +12,7 @@ endpoints {
   }
     action-endpoints {
       action-endpoint (RandomQuery) {
-        accepted-inputs (numberOfSongs)
+        accepted-inputs (numberOfSongs, requestedTempo)
         local-endpoint (RandomQuery.js)
     }
   }
