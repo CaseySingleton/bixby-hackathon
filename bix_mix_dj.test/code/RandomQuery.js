@@ -64,7 +64,7 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
       trackNames[i] = data.tracks.items[i].name
       images[i] = data.tracks.items[i].album.images[0].url
     }
-    return {ids: trackIDs, names: trackNames, images: images}
+    return [trackIDs, trackNames, images]
   }
 
   function getDetailedTrackInfo(trackIDs) {
@@ -80,21 +80,17 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
     }
     return (tempos)
   }
-  
-  function getTracksOfSimilarTempo() {
-    var data = querySpotify()
-    var info = getDetailedTrackInfo(data)
-    console.log(info)
-    var trackDetails = getDetailedTrackInfo(trackIDs.join())
-    var tempos = getTrackTempos(trackDetails)
-  }
-  
-  getTracksOfSimilarTempo()
+
+  var data = querySpotify()
+  var trackNames, trackIDs, images
+  [trackIDs, trackNames, images] = getGeneralTrackInfo(data)
+  var trackDetails = getDetailedTrackInfo(trackIDs.join())
+  var tempos = getTrackTempos(trackDetails)
   return {
-    trackIDs: "123",
-    tempos: 456,
-    trackNames: "trackNames",
-    trackAlbumImage: "images",
+    trackIDs: trackIDs,
+    tempos: tempos,
+    trackNames: trackNames,
+    trackAlbumImage: images,
     trackTiming: "0"
   }
 }
