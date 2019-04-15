@@ -2,7 +2,7 @@ var http = require('http')
 var console = require('console')
 
 module.exports.function = function play () {
-  // var response = http.oauthGetUrl("https://api.spotify.com/v1/me/player/devices", {format: "json"})
+  // var response = http.oauthGetUrl("https://api.spotify.com/v1/me/player", {format: "json"})
   //   console.log(response)
 //  console.log(Object.keys(response));
 //  console.log(Object.value(response));
@@ -16,15 +16,17 @@ module.exports.function = function play () {
   
   //console.log("this is what i got: " + response["details"])
   // console.log(http.oauthPutUrl("https://api.spotify.com/v1/me/player/play", {}))
-  var search = JSON.parse(http.oauthPutUrl("https://api.spotify.com/v1/me/player/play", {}))
+  var search = http.oauthPutUrl("https://api.spotify.com/v1/me/player/play", {})
+  // var response = http.oauthGetUrl("https://api.spotify.com/v1/me/player", {format: "json"})
   // http.oauthGetUrl("https://api.spotify.com/v1/search?q=Muse&type=track")
   // http.oauthGetUrl(url, options)
-  console.log(search)
-     if (search.error.status == 403)
-    return ("You need a premium spotify account for this feature")
-  else if (search.error.status == 204)
+  
+  // console.log(response)
+  // if (search.error.status == 403)
+  //   return ("You need a premium spotify account for this feature")
+  // else if (response.error.status == 200)
     return ("Playback resumed")
-  else if (search.error.status == 400)
-    return ("failed")
-  return (search)
+  // else if (search.error.status == 400)
+  //   return ("failed")
+  // return (search)
 }

@@ -14,10 +14,11 @@ module.exports.function = function pause () {
   //var IDs = response["devices"].map(function(device) {return device["id"]});
   
   //console.log("this is what i got: " + response["details"])
-  var search = http.oauthPutUrl("https://api.spotify.com/v1/me/player/pause")
+  var response = http.oauthPutUrl("https://api.spotify.com/v1/me/player/pause")
+   console.log(response)
   // http.oauthGetUrl("https://api.spotify.com/v1/search?q=Muse&type=track")
   // http.oauthGetUrl(url, options)
-  if (search == 403)
+  if (response == 403)
     return ("You need a premium spotify account for this feature")
   return ("Playback paused")
 }
