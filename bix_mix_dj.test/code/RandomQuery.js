@@ -19,19 +19,27 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
     queryString += consonants.charAt(getRandomNumber(consonants.length))
     queryString += '*'
     queryString += vowels.charAt(getRandomNumber(vowels.length))
-    console.log(queryString)
+    // console.log(queryString)
     return (queryString)
   }
 
-  function querySpotify() {
+  function track(id, name, tempo, image) {
+    this.id = id
+    this.name = name
+    this.tempo = Math.round(tempo)
+    this.image = image
+  }
+
+  function querySpotifyForTracks() {
     let queryName = getRandomQuery()
     let query = "https://api.spotify.com/v1/search?q=" + queryName + "&type=track&market=US&limit=50"
     let data = http.oauthGetUrl(query, {format: "json"})
-    return (data)
+    return (data.tracks.items)
   }
 
   function getTrackTempos(trackDetails) {
     let tempos = []
+    console.log(trackDetails.audio_features)
     for (let i = 0; i < 50; i++) {
       if (trackDetails.audio_features[i] === null)
         tempos[i] = 0
@@ -49,51 +57,58 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
 
   // Returns a list of track IDs as a single string delimited by commas
   function getTracks() {
-    let data = querySpotify()
+    let data = querySpotifyForTracks()
     let trackIDs = [], trackNames = [], images = []
-    for (var i = 0; i < 50; i++) {
-      trackIDs[i] = data.tracks.items[i].id
-      trackNames[i] = data.tracks.items[i].name
-      images[i] = data.tracks.items[i].album.images[0].url
-    }
+    data.forEach(function(item){
+      trackIDs.push(item.id)
+      trackNames.push(item.name)
+      images.push(item.album.images[0].url)
+    })
     let details = getDetailedTrackInfo(trackIDs)
     let tempos = getTrackTempos(details)
     return {ids: trackIDs, names: trackNames, tempos: tempos, images: images}
   }
-
+  
+  function inRange(tempo, range) {
+    let low = requestedTempo - range
+    let high = requestedTempo + range
+    if (Math.floor(tempo) >= low && Math.floor(tempo) <= high)
+      return (true)
+    return (false)
+  }
+  
+  function isRepeat(listOfTracks, trackToAdd) {
+    let found = false
+    listOfTracks.forEach(function (item) {
+      if (item.name === trackToAdd)
+        found = true
+    })
+    return (found)
+  }
+  
   function doTheThing() {
-    let ids = [], names = [], details = [], tempos = [], images = []
     let tracks = null
-    let tooMany = 0, relax = 0, i = 0
-    while (i < numberOfSongs && tooMany < 100) {
+    let tooMany = 0, relax = 0, songsAdded = 0, i = 0
+    let listOfTracks = []
+    while (i < numberOfSongs && tooMany < 50) {
       tracks = getTracks()
-      for (let j = 0; j < 50 && i < numberOfSongs; j++) {
-        if (Math.floor(tracks.tempos[j]) >= requestedTempo - relax && Math.floor(tracks.tempos[j] <= requestedTempo + relax)) {
-          if (names.indexOf(tracks.names[j]) < 0) {
-            ids[i] = tracks.ids[j]
-            names[i] = tracks.names[j]
-            tempos[i] = tracks.tempos[j]
-            images[i] = tracks.images[j]
-            i += 1
-          }
+      for (let j = 0; j < tracks.ids.length && i < numberOfSongs; j++) {
+        if (inRange(tracks.tempos[j], relax) === true && isRepeat(listOfTracks, tracks.names[j]) === false) {
+          listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j], tracks.images[j]))
+          i += 1
+          songsAdded += 1
         }
       }
       tooMany += 1
-      if (tooMany % 5 === 0)
+      if (songsAdded < 3 && tooMany % 5 === 0)
         relax += tooMany % 4
     }
-    return {ids: ids, names: names, tempos: tempos, images: images}
+    return (listOfTracks)
   }
 
-  info = doTheThing()
-  console.log(info.tempos)
-  console.log(info.names)
-  console.log(info.ids)
-  return {
-    trackIDs: info.ids,
-    tempos: info.tempos,
-    trackNames: info.names,
-    trackAlbumImage: info.images,
-    trackTiming: "0"
-  }
+  tracks = doTheThing()
+  tracks.forEach(function(item) {
+    console.log(item)
+  })
+  return {tracks: tracks}
 }

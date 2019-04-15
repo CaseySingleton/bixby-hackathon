@@ -1,20 +1,20 @@
 result-view {
-  match { Tracks (tracks) }
+  match { Tracks (track) }
   render {
      list-of (tracks) { 
       where-each (item) {
         cell-area { 
           slot1 {
             image {
-              url ("#{value(item.trackAlbumImage[0])}")
+              url ("#{value(item.image)}")
               shape (Square)
             }
           }
           slot2 {
             content {
               order (PrimarySecondary)
-            primary ("#{value(item.trackNames[0])}")
-              secondary ("Tempos: #{value(item.tempos[0])}, IDs: #{value(item.trackIDs[0])}")
+              primary ("#{value(item.name)}")
+              secondary ("Tempo: #{value(item.tempo)}, ID: #{value(item.id)}")
             }
           }
         }
