@@ -2,8 +2,9 @@
  var config = require('config')
  var http = require('http')
  var console = require('console')
+ var query = require("./lib/query.js")
 
-module.exports.function = function randomNameQuery (numberOfSongs, requestedTempo) {
+module.exports.function = function searchByGenre (numberOfSongs, requestedTempo, requestedGenre) {
 
   // Returns a random number between 0 and max - 1
   function getRandomNumber(max) {
@@ -35,7 +36,7 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
     while (data === null) {
       let queryName = getRandomQuery()
       let limit = (requestedTempo < 0 ? 10 : 50)
-      let query = "https://api.spotify.com/v1/search?q=" + queryName + "&type=track&limit=" + limit
+      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre:%22" + requestedGenre +"%22&type=track&limit=" + limit
       data = http.oauthGetUrl(query, {format: "json"})
     }
     return (data.tracks.items)
@@ -43,8 +44,7 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
 
   function getTrackTempos(trackDetails) {
     let tempos = []
-    // console.log(trackDetails.audio_features)
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < trackDetails.audio_features.length; i++) {
       if (trackDetails.audio_features[i] === null)
         tempos[i] = 0
       else
@@ -62,8 +62,8 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
   // Returns a list of track IDs as a single string delimited by commas
   function getTracks() {
     let data = querySpotifyForTracks()
+    // console.log(data)
     let trackIDs = [], trackNames = [], images = []
-    console.log(data)
     data.forEach(function(item){
       trackIDs.push(item.id)
       trackNames.push(item.name)
@@ -101,7 +101,7 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
     while (i < numberOfSongs && tooMany < 50) {
       tracks = getTracks()
       for (let j = 0; j < tracks.ids.length && i < numberOfSongs; j++) {
-        if (inRange(tracks.tempos[j], relax) === true && isRepeat(listOfTracks, tracks.names[j]) === false) {
+        if ((requestedTempo === -1 || inRange(tracks.tempos[j], relax) === true) && isRepeat(listOfTracks, tracks.names[j]) === false) {
           listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j], tracks.images[j]))
           i += 1
           songsAdded += 1
@@ -115,8 +115,6 @@ module.exports.function = function randomNameQuery (numberOfSongs, requestedTemp
   }
 
   tracks = doTheThing()
-  tracks.forEach(function(item) {
-    console.log(item)
-  })
+  console.log(tracks)
   return {tracks: tracks}
 }

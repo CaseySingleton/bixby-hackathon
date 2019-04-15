@@ -19,5 +19,9 @@ endpoints {
         accepted-inputs (numberOfSongs, requestedTempo)
         local-endpoint (RandomQuery.js)
     }
+      action-endpoint (SearchByGenre) {
+        accepted-inputs (numberOfSongs, requestedTempo, requestedGenre)
+        local-endpoint (SearchByGenre.js)
+    }
   }
 }

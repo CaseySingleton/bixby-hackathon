@@ -1,10 +1,10 @@
-action (RandomQuery) {
+action (SearchByGenre) {
+  description (Get a number of random songs fitting bmp and genera requirements)
   type (Search)
-  description (Gets a random set of tracks from the spotify API)
   collect {
     input (numberOfSongs) {
       type (NumberOfSongs)
-      min (Optional) max (One)
+      min (Required) max (One)
       default-init {
         intent {
           goal {NumberOfSongs}
@@ -24,13 +24,17 @@ action (RandomQuery) {
     }
     input (requestedTempo) {
       type (RequestedTempo)
-      min (Optional) max (One)
+      min (Required) max (One)
       default-init {
         intent {
           goal {RequestedTempo}
-          value {RequestedTempo (140)}
+          value {RequestedTempo (-1)}
         }
       }
+    }
+    input  (requestedGenre) {
+      type (Genre)
+      min(Required) max (One)
     }
   }
   output (Tracks)
