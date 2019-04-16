@@ -6,6 +6,9 @@
 
 module.exports.function = function searchByGenre (numberOfSongs, requestedTempo, requestedGenre) {
 
+  console.log(requestedGenre)
+  requestedGenre = requestedGenre.split(" ").join("%20") // splits the request string by space and rejoins with %20 to prepare it for a proper query
+  console.log(requestedGenre)
   // Returns a random number between 0 and max - 1
   function getRandomNumber(max) {
     return (Math.floor(Math.random() * Math.floor(max)))
@@ -36,7 +39,7 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     while (data === null) {
       let queryName = getRandomQuery()
       let limit = (requestedTempo < 0 ? 10 : 50)
-      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre:%22" + requestedGenre +"%22&type=track&limit=" + limit
+      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre%3A%22" + requestedGenre +"%22&type=track&limit=" + limit
       data = http.oauthGetUrl(query, {format: "json"})
     }
     return (data.tracks.items)
