@@ -1,0 +1,10 @@
+train (t-w8yw82jlsm9vj3ihh7528n9sh) {
+  utterance ("[g:SearchByGenre] Give me some latin (music)[v:Genre]")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
+  last-modified (1555400479001)
+}
+train (t-wycmhnw5l0xgjdvswncdu1v0t) {
+  utterance ("[g:SearchByGenre] (12)[v:NumberOfSongs] songs please")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmIJuZgQEA)
+  last-modified (1555401523052)
+}

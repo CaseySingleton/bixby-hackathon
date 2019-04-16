@@ -8,8 +8,3 @@ train (t-invkik25n82lsrtti41cr1mtb) {
   plan (Y2BikEjKrIjPBeKULL2S1OISvYKi1LLM/NJiBhl0mQCoTHB+XjoDIxAyQDGQBAA=)
   last-modified (1555369718354)
 }
-train (t-iwc0gelllqsfboy7yuubxu9nu) {
-  utterance ("[g:RandomQuery] Give me (20)[v:NumberOfSongs] songs at (156)[v:RequestedTempo] beats per minute")
-  plan (Y2BhEEvKrIjPBeKULL2S1OISvZCixOTsYgZpdPGgxLyU/NzA0tSiSgZZdEm/0tyk1CL/tOD8vPRiBjkMvamFpUA6NSUkNbcgn4GZgZGBCUgyAGkQhAC4KAA=)
-  last-modified (1555304838380)
-}

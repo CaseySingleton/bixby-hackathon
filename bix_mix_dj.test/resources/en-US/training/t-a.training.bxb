@@ -3,6 +3,11 @@ train (t-agxrovznup1sam0t3eedgbp54) {
   plan (Y2BiEEnKrIjPBeKULL2S1OISvbzUihIGCXRRP6BocH5eOgMjEDJAMZAEAA==)
   last-modified (1555370280524)
 }
+train (t-ai1nclce23shnhkjitxysulk0) {
+  utterance ("[g:SearchByGenre] (folk)[v:Genre] songs")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
+  last-modified (1555400599551)
+}
 train (t-avknb8gqohb7449qx1u4sglfu) {
   utterance ([g:NextSong:continue] one more time)
   plan (Y2BiEEnKrIjPBeKULL2S1OISvbzUihIGCXRRP6BocH5eOgMjEDJAMZAEAA==)

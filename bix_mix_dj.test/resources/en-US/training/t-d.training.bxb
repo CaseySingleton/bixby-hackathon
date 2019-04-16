@@ -8,3 +8,8 @@ train (t-dm1speppfzwzccwogl6ypov77) {
   plan (Y2BikEjKrIjPBeKULL2S1OISvYKi1LLM/NJiBhl0mQCoTHB+XjoDIxAyQDGQBAA=)
   last-modified (1555374580265)
 }
+train (t-dmbjt85mhicywh6zkg9ib3z98) {
+  utterance ("[g:SearchByGenre] get me some (metal)[v:Genre] songs")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
+  last-modified (1555379793101)
+}

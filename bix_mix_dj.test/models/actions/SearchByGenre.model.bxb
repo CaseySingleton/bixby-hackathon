@@ -35,6 +35,12 @@ action (SearchByGenre) {
     input  (requestedGenre) {
       type (Genre)
       min(Required) max (One)
+      default-init {
+        intent {
+          goal {Genre}
+          value {Genre ("")}
+        }
+      }
     }
   }
   output (Tracks)

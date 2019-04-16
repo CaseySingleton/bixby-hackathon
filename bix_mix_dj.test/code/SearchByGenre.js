@@ -3,6 +3,7 @@
  var http = require('http')
  var console = require('console')
  var query = require("./lib/query.js")
+ var genreList = require("./lib/genres.js")
 
 module.exports.function = function searchByGenre (numberOfSongs, requestedTempo, requestedGenre) {
 
@@ -20,37 +21,38 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     queryString += consonants.charAt(getRandomNumber(consonants.length))
     queryString += '*'
     queryString += vowels.charAt(getRandomNumber(vowels.length))
-    // console.log(queryString)
     return (queryString)
   }
 
-  function track(id, name, tempo, image) {
+  function track(id, name, tempo, image, timeSignature, danceability) {
     this.id = id
     this.name = name
     this.tempo = Math.round(tempo)
     this.image = image
+    this.timeSignature = timeSignature
+    this.danceability = danceability
   }
 
   function querySpotifyForTracks() {
     let data = null
-    while (data === null) {
+    while (data === null || data.tracks.items[0] === undefined) {
       let queryName = getRandomQuery()
       let limit = (requestedTempo < 0 ? 10 : 50)
       let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre:%22" + requestedGenre +"%22&type=track&limit=" + limit
+      console.log(query)
       data = http.oauthGetUrl(query, {format: "json"})
     }
     return (data.tracks.items)
   }
 
-  function getTrackTempos(trackDetails) {
-    let tempos = []
-    for (let i = 0; i < trackDetails.audio_features.length; i++) {
-      if (trackDetails.audio_features[i] === null)
-        tempos[i] = 0
-      else
-        tempos[i] = trackDetails.audio_features[i].tempo
-    }
-    return (tempos)
+  function getTrackFeatures(features) {
+    let tempos = [], timeSignatures = [], danceability = []
+    features.forEach(function(item) {
+      tempos.push(item.tempo)
+      timeSignatures.push(item.time_signature)
+      danceability.push((Math.floor(item.danceability * 100)))
+    })
+    return [tempos, timeSignatures, danceability]
   }
 
   function getDetailedTrackInfo(trackIDs) {
@@ -63,18 +65,18 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
   function getTracks() {
     let data = querySpotifyForTracks()
     // console.log(data)
-    let trackIDs = [], trackNames = [], images = []
+    let ids = [], names = [], imgs = []
     data.forEach(function(item){
-      trackIDs.push(item.id)
-      trackNames.push(item.name)
+      ids.push(item.id)
+      names.push(item.name)
       if (item.album.images[0] !== undefined)
-        images.push(item.album.images[0].url)
+        imgs.push(item.album.images[0].url)
       else
-        images.push("https://images.pexels.com/photos/2117937/pexels-photo-2117937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
+        imgs.push("https://images.pexels.com/photos/2117937/pexels-photo-2117937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
     })
-    let details = getDetailedTrackInfo(trackIDs)
-    let tempos = getTrackTempos(details)
-    return {ids: trackIDs, names: trackNames, tempos: tempos, images: images}
+    let tempos, timeSignatures, danceability
+    [tempos, timeSignatures, danceability] = getTrackFeatures(getDetailedTrackInfo(ids).audio_features)
+    return {ids: ids, names: names, tempos: tempos, images: imgs, timeSignatures: timeSignatures, danceability: danceability}
   }
   
   function inRange(tempo, range) {
@@ -102,7 +104,7 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
       tracks = getTracks()
       for (let j = 0; j < tracks.ids.length && i < numberOfSongs; j++) {
         if ((requestedTempo === -1 || inRange(tracks.tempos[j], relax) === true) && isRepeat(listOfTracks, tracks.names[j]) === false) {
-          listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j], tracks.images[j]))
+          listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j],tracks.images[j], tracks.timeSignatures[j], tracks.danceability[j]))
           i += 1
           songsAdded += 1
         }
@@ -113,8 +115,23 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     }
     return (listOfTracks)
   }
+  
+  function checkValidGenre() {
+    let found = false
+    for (let i = 0; i < genreList.genres.length; i++) {
+      if (requestedGenre.toString() === genreList.genres[i].toString())
+        found = true
+    }
+    console.log(found)
+    if (found === false)
+      requestedGenre = ""
+  }
 
+  checkValidGenre()
   tracks = doTheThing()
   console.log(tracks)
+  tracks.sort(function(a, b) {
+    return (b.tempo - a.tempo)
+  })
   return {tracks: tracks}
 }
