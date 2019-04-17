@@ -1,0 +1,10 @@
+train (t-jfmycyjc6sgk7ikb53ymf7tfn) {
+  utterance ([g:StartPlayer] continue)
+  plan (Y2BiEEnKrIjPBeKULL2S1OISvYKcxEoGaXTR4JLEopIAoFRqEQMjEDJAMZAEAA==)
+  last-modified (1555315420186)
+}
+train (t-jnsqqwno78p3d8ub7xbufbj4o) {
+  utterance ("[g:SearchByGenre] get me (metal)[v:Genre] songs at (100)[v:RequestedTempo] beats per minute")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAFmsBxQBgA=)
+  last-modified (1555457015479)
+}

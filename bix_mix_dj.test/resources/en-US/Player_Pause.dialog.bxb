@@ -1,4 +1,0 @@
-// dialog (Result) {
-//   match: Player (this)
-//   template("__TEMPLATE_TEXT__")
-// }

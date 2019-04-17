@@ -1,0 +1,5 @@
+train (t-vw2a07o4ed0iqfd69560gk3rn) {
+  utterance ("[g:SearchByGenre] give me (3)[v:NumberOfSongs] (metal)[v:Genre] songs at (120)[v:RequestedTempo] beats per minute")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEkOQA=)
+  last-modified (1555453958245)
+}

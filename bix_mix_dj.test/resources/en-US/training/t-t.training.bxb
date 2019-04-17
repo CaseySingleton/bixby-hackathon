@@ -1,5 +1,6 @@
-train (t-tsh22j8bybv5ml8gt6v5cm6gx) {
-  utterance ("[g:PausePlayer] please (stop)[v:auth] the music")
-  plan (Y2BmEEnKrIjPBeKULL2S1OISvcTSkgwcotLoogGJpcWpATmJlalFDIwMTEDMCKaZGIAAAA==)
-  last-modified (1555111323368)
+train (t-tnsfbogd82vec2kga7u4w89j0) {
+  utterance ([g:MakePlaylist:continue:RandomQuery] make a playlist)
+  plan (Y2BikEjKrIjPBeKULL2S1OISvYKcxMqczOISBhl0Gd/E7NQAmCwjEDJAMZAEAA==)
+  enabled (false)
+  last-modified (1555404849276)
 }
