@@ -6,14 +6,5 @@ train (t-dbuflo1dmdpi1u3sid2w26i1d) {
 train (t-dm1speppfzwzccwogl6ypov77) {
   utterance ([g:PreviousSong] back)
   plan (Y2BikEjKrIjPBeKULL2S1OISvYKi1LLM/NJiBhl0mQCoTHB+XjoDIxAyQDGQBAA=)
-<<<<<<< HEAD
-  last-modified (1555374580265)
-}
-train (t-dmbjt85mhicywh6zkg9ib3z98) {
-  utterance ("[g:SearchByGenre] get me some (metal)[v:Genre] songs")
-  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
-  last-modified (1555379793101)
-=======
   last-modified (1555397863528)
->>>>>>> 5aacfdfe3dcc97f243b9e4e0c9c7e77faa23fdd3
 }

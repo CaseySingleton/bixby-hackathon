@@ -1,17 +1,5 @@
-train (t-65vcgcbvf7uewlubrwco19eok) {
-  utterance ([g:NextSong] go to the next song)
-  plan (Y2BiEEnKrIjPBeKULL2S1OISvbzUihIGCXRRP6BocH5eOgMjEDJAMZAEAA==)
-  last-modified (1555369344020)
-}
-<<<<<<< HEAD
-train (t-6n4odbebdovdcf5tr08oaxct8) {
-  utterance ("[g:SearchByGenre] Get me (4)[v:NumberOfSongs] tracks at (60)[v:RequestedTempo] beats per minute")
-  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAFmIBssAwA=)
-  last-modified (1555401546667)
-=======
-train (t-6zvp8kc0lo8e77nwgjbf77qad) {
-  utterance ("[g:MakePlaylist:continue:SearchByGenre] create a playlist called (this ones for mom)[v:playlistname]")
-  plan (Y2BmkEjKrIjPBeKULL2S1OISvYKcxMqczOISBhl0Gd/E7NQAnLIwfXmJuakMTAyMQMwAJBkZQADKBwA=)
-  last-modified (1555398853742)
->>>>>>> 5aacfdfe3dcc97f243b9e4e0c9c7e77faa23fdd3
+train (t-6kbh0wxcssu8xyk7pq43v1qu5) {
+  utterance ("[g:SearchByGenre] get some (lo-fi)[v:Genre] songs")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
+  last-modified (1555464662784)
 }

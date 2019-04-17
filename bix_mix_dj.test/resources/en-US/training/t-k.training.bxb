@@ -3,3 +3,8 @@ train (t-k36wzrzuecwy834b6w7m8hw7k) {
   plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAFmIBssAwA=)
   last-modified (1555400546712)
 }
+train (t-kqtw9z70db17h13wc95fc8v4z) {
+  utterance ("[g:SearchByGenre] Get me some (jazz)[v:Genre] music")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
+  last-modified (1555457248203)
+}

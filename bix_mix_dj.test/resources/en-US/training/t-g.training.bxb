@@ -8,3 +8,8 @@ train (t-glxne176w0vcf16lin06il67g) {
   plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEmsBwDAA==)
   last-modified (1555380921087)
 }
+train (t-gyh8jlqrabluyct1iiucqoy87) {
+  utterance ("[g:SearchByGenre] Get me some (thrash)[v:Genre] music with a tempo of (188)[v:RequestedTempo]")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAFmsBxQBgA=)
+  last-modified (1555457289730)
+}

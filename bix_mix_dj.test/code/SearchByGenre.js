@@ -21,9 +21,15 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     let vowels = "aeiou"
     let queryString = ""
 
-    queryString += consonants.charAt(getRandomNumber(consonants.length))
+    if (getRandomNumber(2) === 1)
+      queryString += consonants.charAt(getRandomNumber(consonants.length))
+    else
+      queryString += vowels.charAt(getRandomNumber(vowels.length))
     queryString += '*'
-    queryString += vowels.charAt(getRandomNumber(vowels.length))
+    if (getRandomNumber(2) === 0)
+      queryString += consonants.charAt(getRandomNumber(consonants.length))
+    else
+      queryString += vowels.charAt(getRandomNumber(vowels.length))
     return (queryString)
   }
 
@@ -40,9 +46,7 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     let data = null
     while (data === null || data.tracks.items[0] === undefined) {
       let queryName = getRandomQuery()
-      let limit = (requestedTempo < 0 ? 10 : 50)
-      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre%3A%22" + requestedGenre + "%22&type=track&limit=" + limit
-      console.log(query)
+      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre:%22" + requestedGenre + "%22&type=track"
       data = http.oauthGetUrl(query, {format: "json"})
     }
     return (data.tracks.items)
@@ -51,9 +55,16 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
   function getTrackFeatures(features) {
     let tempos = [], timeSignatures = [], danceability = []
     features.forEach(function(item) {
-      tempos.push(item.tempo)
-      timeSignatures.push(item.time_signature)
-      danceability.push((Math.floor(item.danceability * 100)))
+      if (item !== null) {
+        tempos.push(item.tempo)
+        timeSignatures.push(item.time_signature)
+        danceability.push((Math.floor(item.danceability * 100)))
+      }
+      else {
+        tempos.push(0)
+        timeSignatures.push(0)
+        danceability.push(0)
+      }
     })
     return [tempos, timeSignatures, danceability]
   }
@@ -61,13 +72,15 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
   function getDetailedTrackInfo(trackIDs) {
     let query = "https://api.spotify.com/v1/audio-features?ids=" + trackIDs.join()
     let trackDetails = http.oauthGetUrl(query, {format: "json"})
+    console.log("Details")
+    console.log(trackDetails)
     return (trackDetails)
   }
 
   // Returns a list of track IDs as a single string delimited by commas
   function getTracks() {
     let data = querySpotifyForTracks()
-    // console.log(data)
+    console.log(data)
     let ids = [], names = [], imgs = []
     data.forEach(function(item){
       ids.push(item.id)
@@ -106,7 +119,7 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     while (i < numberOfSongs && tooMany < 50) {
       tracks = getTracks()
       for (let j = 0; j < tracks.ids.length && i < numberOfSongs; j++) {
-        if ((requestedTempo === -1 || inRange(tracks.tempos[j], relax) === true) && isRepeat(listOfTracks, tracks.names[j]) === false) {
+        if ((requestedTempo === -1 || inRange(tracks.tempos[j], relax) === true) && isRepeat(listOfTracks, tracks.names[j]) === false && tracks.tempos[j] > 0) {
           listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j],tracks.images[j], tracks.timeSignatures[j], tracks.danceability[j]))
           i += 1
           songsAdded += 1
@@ -125,7 +138,6 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
       if (requestedGenre.toString() === genreList.genres[i].toString())
         found = true
     }
-    console.log(found)
     if (found === false)
       requestedGenre = ""
   }
