@@ -4,7 +4,7 @@ action (SearchByGenre) {
   collect {
     input (numberOfSongs) {
       type (NumberOfSongs)
-      min (Required) max (One)
+      min (Optional) max (One)
       default-init {
         intent {
           goal {NumberOfSongs}
@@ -24,7 +24,7 @@ action (SearchByGenre) {
     }
     input (requestedTempo) {
       type (RequestedTempo)
-      min (Required) max (One)
+      min (Optional) max (One)
       default-init {
         intent {
           goal {RequestedTempo}
@@ -34,7 +34,13 @@ action (SearchByGenre) {
     }
     input  (requestedGenre) {
       type (Genre)
-      min(Required) max (One)
+      min(Optional) max (One)
+      default-init {
+        intent {
+          goal {Genre}
+          value {Genre ("")}
+        }
+      }
     }
   }
   output (Tracks)
