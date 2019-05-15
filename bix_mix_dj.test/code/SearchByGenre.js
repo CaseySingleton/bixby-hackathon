@@ -1,8 +1,9 @@
- var secret = require('secret')
+var secret = require('secret')
  var config = require('config')
  var http = require('http')
  var console = require('console')
  var query = require("./lib/query.js")
+ var genreList = require("./lib/genres.js")
 
 module.exports.function = function searchByGenre (numberOfSongs, requestedTempo, requestedGenre) {
 
@@ -20,64 +21,78 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     let vowels = "aeiou"
     let queryString = ""
 
-    queryString += consonants.charAt(getRandomNumber(consonants.length))
+    if (getRandomNumber(2) === 1)
+      queryString += consonants.charAt(getRandomNumber(consonants.length))
+    else
+      queryString += vowels.charAt(getRandomNumber(vowels.length))
     queryString += '*'
-    queryString += vowels.charAt(getRandomNumber(vowels.length))
-    // console.log(queryString)
+    if (getRandomNumber(2) === 1)
+      queryString += consonants.charAt(getRandomNumber(consonants.length))
+    else
+      queryString += vowels.charAt(getRandomNumber(vowels.length))
     return (queryString)
   }
 
-  function track(id, name, tempo, image) {
+  function track(id, name, tempo, image, timeSignature, danceability) {
     this.id = id
     this.name = name
     this.tempo = Math.round(tempo)
     this.image = image
+    this.timeSignature = timeSignature
+    this.danceability = danceability
   }
 
   function querySpotifyForTracks() {
     let data = null
-    while (data === null) {
+    while (data === null || data.tracks.items[0] === undefined) {
       let queryName = getRandomQuery()
-      let limit = (requestedTempo < 0 ? 10 : 50)
-      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre%3A%22" + requestedGenre +"%22&type=track&limit=" + limit
+      let query = "https://api.spotify.com/v1/search?q=" + queryName + "%20genre:%22" + requestedGenre + "%22&type=track"
       data = http.oauthGetUrl(query, {format: "json"})
     }
     return (data.tracks.items)
   }
 
-  function getTrackTempos(trackDetails) {
-    let tempos = []
-    for (let i = 0; i < trackDetails.audio_features.length; i++) {
-      if (trackDetails.audio_features[i] === null)
-        tempos[i] = 0
-      else
-        tempos[i] = trackDetails.audio_features[i].tempo
-    }
-    return (tempos)
+  function getTrackFeatures(features) {
+    let tempos = [], timeSignatures = [], danceability = []
+    features.forEach(function(item) {
+      if (item !== null) {
+        tempos.push(item.tempo)
+        timeSignatures.push(item.time_signature)
+        danceability.push((Math.floor(item.danceability * 100)))
+      }
+      else {
+        tempos.push(0)
+        timeSignatures.push(0)
+        danceability.push(0)
+      }
+    })
+    return [tempos, timeSignatures, danceability]
   }
 
   function getDetailedTrackInfo(trackIDs) {
     let query = "https://api.spotify.com/v1/audio-features?ids=" + trackIDs.join()
     let trackDetails = http.oauthGetUrl(query, {format: "json"})
+    console.log("Details")
+    console.log(trackDetails)
     return (trackDetails)
   }
 
   // Returns a list of track IDs as a single string delimited by commas
   function getTracks() {
     let data = querySpotifyForTracks()
-    // console.log(data)
-    let trackIDs = [], trackNames = [], images = []
+    console.log(data)
+    let ids = [], names = [], imgs = []
     data.forEach(function(item){
-      trackIDs.push(item.id)
-      trackNames.push(item.name)
+      ids.push(item.id)
+      names.push(item.name)
       if (item.album.images[0] !== undefined)
-        images.push(item.album.images[0].url)
+        imgs.push(item.album.images[0].url)
       else
-        images.push("https://images.pexels.com/photos/2117937/pexels-photo-2117937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
+        imgs.push("https://images.pexels.com/photos/2117937/pexels-photo-2117937.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")
     })
-    let details = getDetailedTrackInfo(trackIDs)
-    let tempos = getTrackTempos(details)
-    return {ids: trackIDs, names: trackNames, tempos: tempos, images: images}
+    let tempos, timeSignatures, danceability
+    [tempos, timeSignatures, danceability] = getTrackFeatures(getDetailedTrackInfo(ids).audio_features)
+    return {ids: ids, names: names, tempos: tempos, images: imgs, timeSignatures: timeSignatures, danceability: danceability}
   }
   
   function inRange(tempo, range) {
@@ -103,9 +118,10 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     let listOfTracks = []
     while (i < numberOfSongs && tooMany < 50) {
       tracks = getTracks()
-      for (let j = 0; j < tracks.ids.length && i < numberOfSongs; j++) {
-        if ((requestedTempo === -1 || inRange(tracks.tempos[j], relax) === true) && isRepeat(listOfTracks, tracks.names[j]) === false) {
-          listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j], tracks.images[j]))
+      for (let j = 0; j < tracks.ids.length && i < numberOfSongs; j += (requestedTempo > -1) ? 1 : getRandomNumber(tracks.ids.length - j) + j) {
+        if ((requestedTempo === -1 || inRange(tracks.tempos[j], relax) === true) && isRepeat(listOfTracks, tracks.names[j]) === false && tracks.tempos[j] > 0) {
+          console.log(j)
+          listOfTracks.push(new track(tracks.ids[j], tracks.names[j], tracks.tempos[j],tracks.images[j], tracks.timeSignatures[j], tracks.danceability[j]))
           i += 1
           songsAdded += 1
         }
@@ -116,8 +132,22 @@ module.exports.function = function searchByGenre (numberOfSongs, requestedTempo,
     }
     return (listOfTracks)
   }
+  
+  function checkValidGenre() {
+    let found = false
+    for (let i = 0; i < genreList.genres.length; i++) {
+      if (requestedGenre.toString() === genreList.genres[i].toString())
+        found = true
+    }
+    if (found === false)
+      requestedGenre = ""
+  }
 
+  checkValidGenre()
   tracks = doTheThing()
   console.log(tracks)
+  tracks.sort(function(a, b) {
+    return (b.tempo - a.tempo)
+  })
   return {tracks: tracks}
 }
