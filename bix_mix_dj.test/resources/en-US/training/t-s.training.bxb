@@ -13,8 +13,3 @@ train (t-sf08edlyt4omkt3a29c8rhu8q) {
   plan (Y2BiEEnKrIjPBeKULL2S1OISvbzUihIGCXRRP6BocH5eOgMjEDJAMZAEAA==)
   last-modified (1555370333092)
 }
-train (t-slf29xdo3gbr33lmtlctaffwo) {
-  utterance ("[g:RandomQuery] Get me some songs with a tempo of (155)[v:RequestedTempo]")
-  plan (Y2BmEEvKrIjPBeKULL2S1OISvZCixOTsYgZpdPGgxLyU/NzA0tSiSgY5DMnUwlIgnZoSkppbkM/AxMAIxAxAkpEBBKB8AA==)
-  last-modified (1555305020245)
-}
