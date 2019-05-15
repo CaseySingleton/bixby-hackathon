@@ -6,30 +6,17 @@ result-view {
         cell-area { 
           slot1 {
             image {
-              url ("#{value(item.trackAlbumImage)}")
+              url ("#{value(item.trackAlbumImage[0])}")
               shape (Square)
             }
           }
           slot2 {
             content {
               order (PrimarySecondary)
-              // primary {
-          // paragraph {
-          //   style (Title_M)
-          //   value("Track IDs: #{value(item.trackIDs)}")
-          // }
-          // paragraph {
-            // style (Title_S)
-            primary ("#{value(item.trackNames)}")
+            primary ("#{value(item.trackNames[0])}")
               secondary ("Tempos: #{value(item.tempos[0])}, IDs: #{value(item.trackIDs[0])}")
-        // }
             }
           }
-          // slot3 {
-          //   image {
-          //     url ("#{value(item.trackAlbumImage[1])})
-          //   }
-          // }
         }
       }
     }

@@ -1,5 +1,5 @@
-action (authorize) {
-  type (Resolver)
-  description (Get Oauth2 credentials)
-  output (auth)
-}
+// action (authorize) {
+//   type (Resolver)
+//   description (Get Oauth2 credentials)
+//   output (auth)
+// }
