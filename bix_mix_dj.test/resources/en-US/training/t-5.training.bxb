@@ -8,3 +8,8 @@ train (t-5b5gyzcmxhu7w7y1q4lzn69tu) {
   plan (Y2BiEE3KrIjPBeKULL2S1OISvYLE0uJUBml04QCQcEBOYmVqEQMjEDJAMZAEAA==)
   last-modified (1555281168399)
 }
+train (t-5pho58scstobvjryegpuqm8gz) {
+  utterance ("[g:SearchByGenre] Get me some (country)[v:Genre] songs")
+  plan (Y2BmEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwEwMjEDMASUYGEIDyAQ==)
+  last-modified (1555307525557)
+}
