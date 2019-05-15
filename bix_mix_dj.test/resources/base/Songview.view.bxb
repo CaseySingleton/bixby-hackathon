@@ -14,7 +14,7 @@ result-view {
             content {
               order (PrimarySecondary)
               primary ("#{value(item.name)}")
-              secondary ("Tempo: #{value(item.tempo)}, ID: #{value(item.id)}")
+              secondary ("Tempo: #{value(item.tempo)}, Danceability: #{value(item.danceability)}")
             }
           }
         }
