@@ -3,3 +3,8 @@ train (t-p73vb1qnmj7p41d2ng4yl3rug) {
   plan (Y2BikEjKrIjPBeKULL2S1OISvYKi1LLM/NJiBhl0mQCoTHB+XjoDIxAyQDGQBAA=)
   last-modified (1555369794273)
 }
+train (t-pqsj7k32jd51pwuj6gxxeibrt) {
+  utterance ("[g:SearchByGenre] i want (20)[v:NumberOfSongs] songs at (140)[v:RequestedTempo] bpm in (electronic)[v:Genre]")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEkOQA=)
+  last-modified (1555387486898)
+}

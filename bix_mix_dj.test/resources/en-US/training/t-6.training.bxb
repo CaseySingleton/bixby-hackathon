@@ -3,8 +3,8 @@ train (t-65vcgcbvf7uewlubrwco19eok) {
   plan (Y2BiEEnKrIjPBeKULL2S1OISvbzUihIGCXRRP6BocH5eOgMjEDJAMZAEAA==)
   last-modified (1555369344020)
 }
-train (t-6n4odbebdovdcf5tr08oaxct8) {
-  utterance ("[g:Tracks] Get me (4)[v:NumberOfSongs] tracks at (60)[v:RequestedTempo] beats per minute")
-  plan (Y2BhEEvKrIjPBeKULL2S1OISvZCixOTsYgZpdPGgxLyU/NzA0tSiSgZZdEm/0tyk1CL/tOD8vPRiBjkMvamFpUA6NSUkNbcgn4GZgZGBCUgyAGkQhAAQHywKAA==)
-  last-modified (1555279941386)
+train (t-6zvp8kc0lo8e77nwgjbf77qad) {
+  utterance ("[g:MakePlaylist:continue:SearchByGenre] create a playlist called (this ones for mom)[v:playlistname]")
+  plan (Y2BmkEjKrIjPBeKULL2S1OISvYKcxMqczOISBhl0Gd/E7NQAnLIwfXmJuakMTAyMQMwAJBkZQADKBwA=)
+  last-modified (1555398853742)
 }

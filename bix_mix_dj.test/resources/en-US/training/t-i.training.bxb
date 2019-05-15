@@ -8,8 +8,13 @@ train (t-invkik25n82lsrtti41cr1mtb) {
   plan (Y2BikEjKrIjPBeKULL2S1OISvYKi1LLM/NJiBhl0mQCoTHB+XjoDIxAyQDGQBAA=)
   last-modified (1555369718354)
 }
+train (t-ipzxgnwrzjqpvnk9zs9hoeamb) {
+  utterance ("[g:SearchByGenre] get me (10)[v:NumberOfSongs] songs in (deep house)[v:Genre] at (120)[v:RequestedTempo] bpm")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAEkOQA=)
+  last-modified (1555382476157)
+}
 train (t-iwc0gelllqsfboy7yuubxu9nu) {
-  utterance ("[g:RandomQuery] Give me (20)[v:NumberOfSongs] songs at (156)[v:RequestedTempo] beats per minute")
-  plan (Y2BhEEvKrIjPBeKULL2S1OISvZCixOTsYgZpdPGgxLyU/NzA0tSiSgZZdEm/0tyk1CL/tOD8vPRiBjkMvamFpUA6NSUkNbcgn4GZgZGBCUgyAGkQhAC4KAA=)
-  last-modified (1555304838380)
+  utterance ("[g:SearchByGenre] Give me (20)[v:NumberOfSongs] songs at (156)[v:RequestedTempo] beats per minute")
+  plan (Y2BlEEvKrIjPBeKULL2S1OISvZCixOTsYgZZdPHg1MSi5AynSvfUvKJUBlF0aYgwhi6/0tyk1CL/tOD8vPRiBjl06aDUwlIgnZoSkppbkM/AwsDIwMTADKQZgCwIhAFmIBssAwA=)
+  last-modified (1555404931172)
 }
