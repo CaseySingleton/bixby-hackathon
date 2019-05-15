@@ -11,6 +11,10 @@ endpoints {
     }
   }
     action-endpoints {
+      action-endpoint (PausePlayer) {
+      accepted-inputs ($vivContext)
+      local-endpoint (Pause.js)
+    }
       action-endpoint (RandomQuery) {
         accepted-inputs (numberOfSongs, requestedTempo)
         local-endpoint (RandomQuery.js)
