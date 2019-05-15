@@ -19,9 +19,17 @@ endpoints {
       accepted-inputs ($vivContext)
       local-endpoint (Pause.js)
     }
-      action-endpoint (RandomQuery) {
-        accepted-inputs (numberOfSongs, requestedTempo)
-        local-endpoint (RandomQuery.js)
+    action-endpoint (NextSong) {
+      accepted-inputs ($vivContext)
+      local-endpoint (Next.js)
+    }
+    action-endpoint (PreviousSong) {
+      accepted-inputs ($vivContext)
+      local-endpoint (Previous.js)
+    }
+    action-endpoint (RandomQuery) {
+      accepted-inputs (numberOfSongs, requestedTempo)
+      local-endpoint (RandomQuery.js)
     }
   }
 }
