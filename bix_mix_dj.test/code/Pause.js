@@ -3,7 +3,7 @@
  var http = require('http')
  var console = require('console')
 module.exports.function = function auth () {
- var response = http.oauthGetUrl("https://api.spotify.com/v1/me/player/devices",  { format: 'json'})
+ var response = http.oauthGetUrl("https://api.spotify.com/v1/me/player/devices", {format: "json"})
     console.log(response)
 //  console.log(Object.keys(response));
 //  console.log(Object.value(response));

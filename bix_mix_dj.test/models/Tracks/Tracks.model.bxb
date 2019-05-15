@@ -1,0 +1,23 @@
+structure (Tracks) {
+  description (A list of tracks)
+  property (trackIDs) {
+    type (TrackID)
+    min (Required) max (Many)
+  }
+  property (tempos) {
+    type(Tempo)
+    min (Required) max (Many)
+  }
+  property (trackNames) {
+    type(TrackName)
+    min (Required) max (Many)
+  }
+  property (trackAlbumImage) {
+    type(TrackAlbumImage)
+    min (Required) max (Many)
+  }
+  property (trackTiming) {
+    type(TrackTiming)
+    min (Required) max (Many)
+  }
+}
