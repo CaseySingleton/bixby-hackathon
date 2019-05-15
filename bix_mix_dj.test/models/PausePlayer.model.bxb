@@ -1,5 +1,5 @@
 action (PausePlayer) {
-  type (
+  type (Search)
   description (Pause user playback)
   // collect {
   //   input () {
@@ -7,5 +7,5 @@ action (PausePlayer) {
   //     // min (Optional) max (One)
   //   }
   // }
-  output (status_pause)
+  output (auth)
 }
