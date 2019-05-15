@@ -14,7 +14,7 @@ result-view {
             content {
               order (PrimarySecondary)
             primary ("#{value(item.trackNames[0])}")
-              secondary ("Tempos: #{value(item.tempos[0])}, IDs: #{value(item.trackIDs[0])}")
+              secondary ("Tempos: #{value(item.tempos)}, IDs: #{value(item.trackIDs[0])}")
             }
           }
         }
