@@ -1,21 +1,35 @@
 result-view {
   match { Tracks (tracks) }
   render {
-    layout {
-      section {
-        content {
-          paragraph {
-            style (Title_M)
-            value("Track IDs: #{value(tracks.trackIDs)}")
+     list-of (tracks) { 
+      where-each (item) {
+        cell-area { 
+          slot1 {
+            image {
+              url ("#{value(item.trackAlbumImage)}")
+              shape (Square)
+            }
           }
-          paragraph {
-            style (Title_M)
-            value("Names: #{value(tracks.trackNames)}")
+          slot2 {
+            content {
+              order (PrimarySecondary)
+              // primary {
+          // paragraph {
+          //   style (Title_M)
+          //   value("Track IDs: #{value(item.trackIDs)}")
+          // }
+          // paragraph {
+            // style (Title_S)
+            primary ("#{value(item.trackNames)}")
+              secondary ("Tempos: #{value(item.tempos[0])}, IDs: #{value(item.trackIDs[0])}")
+        // }
+            }
           }
-          paragraph {
-            style (Title_M)
-            value("Tempos: #{value(tracks.tempos)}")
-          }
+          // slot3 {
+          //   image {
+          //     url ("#{value(item.trackAlbumImage[1])})
+          //   }
+          // }
         }
       }
     }
