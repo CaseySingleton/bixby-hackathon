@@ -7,7 +7,7 @@ authorization{
     authorize-endpoint (https://accounts.spotify.com/authorize)
     client-id (73b6be8b3bdd40919f6fefc272a22f1b)
     client-secret (9c54b3c2333749f9bcd1f3231967b99c)
-    scope ()
+    scope (user-read-playback-state)
     token-endpoint (https://accounts.spotify.com/api/token)
   }
 }
